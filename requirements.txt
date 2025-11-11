@@ -17,7 +17,7 @@ openpyxl==3.1.2
 
 # Embeddings & Vector Store
 sentence-transformers==2.3.1
-faiss-cpu==1.7.4
+faiss-cpu==1.8.0.post1
 
 # Search
 duckduckgo-search==4.4.3

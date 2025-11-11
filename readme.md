@@ -1,4 +1,4 @@
-# 🤖 Agentic RAG Chatbot with LangGraph
+# 🤖 File Samvad - Agentic RAG Chatbot with LangGraph
 
 A production-ready, modular Retrieval-Augmented Generation (RAG) chatbot built with LangGraph, featuring:
 - Multi-format document support (PDF, DOCX, TXT, CSV, PPTX, XLSX)
@@ -38,21 +38,21 @@ User Query → Retrieve (from docs) → Check Relevance → [Relevant?]
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
-cd agentic_rag_chatbot
+git clone https://github.com/Adarsh809/File-Samvad
+cd File-Samvad
 ```
 
 ### 2. Create virtual environment
 
 ```bash
-python -m venv venv
+uv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 ### 3. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+uv add -r requirements.txt
 ```
 
 ### 4. Set up API keys
@@ -70,7 +70,7 @@ streamlit run app.py
 ### Using the chatbot
 
 1. **Configure API Key**: Enter your Groq API key in the sidebar
-2. **Select Model**: Choose from available Groq models (default: llama-3.1-70b-versatile)
+2. **Select Model**: Choose from available Groq models 
 3. **Upload Documents**: Upload one or more files (PDF, DOCX, etc.)
 4. **Process Files**: Click "Process Files" to create the vector store
 5. **Start Chatting**: Ask questions about your documents!
@@ -97,8 +97,8 @@ agentic_rag_chatbot/
 ### Model Options
 
 Available Groq models:
-- `llama-3.1-70b-versatile` (default) - Best balance of speed and quality
-- `llama-3.1-8b-instant` - Fastest responses
+- `llama-3.1-8b-instant` (default) - Fastest responses
+- `llama-3.1-70b-versatile` - Best balance of speed and quality
 - `mixtral-8x7b-32768` - Large context window
 - `gemma2-9b-it` - Efficient and accurate
 
@@ -234,7 +234,7 @@ workflow.add_edge("check_relevance", "custom_node")
 
 ### "No module named X"
 ```bash
-pip install -r requirements.txt
+uv add -r requirements.txt
 ```
 
 ### "API Key Error"

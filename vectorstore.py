@@ -3,7 +3,9 @@ Vector store module using FAISS
 """
 import os
 from typing import List, Optional, Tuple
-from langchain_community.vectorstores import FAISS
+# from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores import Chroma
+
 from langchain_core.documents import Document
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from utils import get_logger
@@ -22,7 +24,7 @@ class VectorStoreManager:
             persist_directory: Directory to persist vector store
         """
         self.persist_directory = persist_directory
-        self.vectorstore: Optional[FAISS] = None
+        self.vectorstore: Optional[Chroma] = None
         
         # Create directory if it doesn't exist
         os.makedirs(persist_directory, exist_ok=True)
@@ -30,7 +32,7 @@ class VectorStoreManager:
     
     def create_vectorstore(self, 
                           documents: List[Document], 
-                          embeddings: HuggingFaceEmbeddings) -> FAISS:
+                          embeddings: HuggingFaceEmbeddings) -> Chroma:
         """
         Create a new vector store from documents
         
@@ -43,7 +45,7 @@ class VectorStoreManager:
         """
         try:
             logger.info(f"Creating vector store with {len(documents)} documents...")
-            self.vectorstore = FAISS.from_documents(documents, embeddings)
+            self.vectorstore = Chroma.from_documents(documents, embeddings)
             logger.info("Vector store created successfully")
             return self.vectorstore
         except Exception as e:
@@ -71,7 +73,7 @@ class VectorStoreManager:
     
     def load_vectorstore(self, 
                         embeddings: HuggingFaceEmbeddings,
-                        name: str = "index") -> Optional[FAISS]:
+                        name: str = "index") -> Optional[Chroma]:
         """
         Load vector store from disk
         
@@ -85,7 +87,7 @@ class VectorStoreManager:
         try:
             load_path = os.path.join(self.persist_directory, name)
             if os.path.exists(load_path):
-                self.vectorstore = FAISS.load_local(
+                self.vectorstore = Chroma.load_local(
                     load_path, 
                     embeddings,
                     allow_dangerous_deserialization=True
@@ -182,7 +184,7 @@ class VectorStoreManager:
 
 
 def create_vectorstore(documents: List[Document], 
-                      embeddings: HuggingFaceEmbeddings) -> FAISS:
+                      embeddings: HuggingFaceEmbeddings) -> Chroma:
     """
     Convenience function to create vector store
     
